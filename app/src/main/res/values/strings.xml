@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">tapas-diego-unai</string>
+    <string name="label_total">Total:</string>
+    <string name="label_puntos">ptos.</string>
+    <string name="label_media">Media:</string>
+    <string name="label_error">Error en la aplicación</string>
 </resources>
