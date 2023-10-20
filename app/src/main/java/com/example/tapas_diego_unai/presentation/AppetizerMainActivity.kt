@@ -37,10 +37,10 @@ class AppetizerMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         setupBinding()
         setupView()
         setupObserver()
+        viewModel.loadAppetizer()
     }
 
     private fun setupBinding(){

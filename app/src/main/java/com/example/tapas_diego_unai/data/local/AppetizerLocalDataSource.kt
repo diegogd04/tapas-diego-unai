@@ -12,7 +12,7 @@ class AppetizerLocalDataSource(
     private val context: Context,
     private val serialization: JsonSerialization
 ) {
-    private val sharedPref = context.getSharedPreferences("Appetizer", Context.MODE_PRIVATE)
+    private val sharedPref = context.getSharedPreferences("appetizer", Context.MODE_PRIVATE)
     private val appetizerId = "1"
 
     fun getAppetizer():Either<ErrorApp, Appetizer>{
