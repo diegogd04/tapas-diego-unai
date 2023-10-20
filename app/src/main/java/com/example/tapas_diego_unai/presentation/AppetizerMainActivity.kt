@@ -14,6 +14,7 @@ import com.example.tapas_diego_unai.domain.GetAppetizerUseCase
 import com.faltenreich.skeletonlayout.Skeleton
 import com.google.android.material.snackbar.Snackbar
 import com.ugdgomezdiez.androidtraining.app.ErrorApp
+import com.ugdgomezdiez.androidtraining.app.extensions.setUrl
 import java.lang.Error
 
 class AppetizerMainActivity : AppCompatActivity() {
@@ -37,6 +38,9 @@ class AppetizerMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupBinding()
+        setupView()
+        setupObserver()
     }
 
     private fun setupBinding(){
@@ -55,15 +59,25 @@ class AppetizerMainActivity : AppCompatActivity() {
             }else{
                 hideLoading()
             }
+
+            it.errorApp?.let{
+                showError(it)
+            }
+
+            it.appetizer?.let {
+                bindData(it)
+            }
         }
+        viewModel.uiState.observe(this, observer)
     }
 
-   /* private fun showError(error: ErrorApp){
+   private fun showError(error: ErrorApp){
         Snackbar.make(
             binding.root,
-            getString(R.string.message_error)
-        )
-    }*/
+            getString(R.string.label_error),
+            Snackbar.LENGTH_SHORT
+        ).show()
+    }
     private fun showLoading(){
         skeleton.showSkeleton()
     }
@@ -74,7 +88,12 @@ class AppetizerMainActivity : AppCompatActivity() {
 
     private fun bindData(appetizer: Appetizer){
         binding.apply {
-            ti
+            imagen.setUrl(appetizer.image)
+            puesto.text = appetizer.ranking
+            name.text = appetizer.name
+            location.text = appetizer.location
+            puntosTotales.text = appetizer.totalPoints.toString()
+            puntosMedia.text = appetizer.averagePoints.toString()
         }
     }
 }
